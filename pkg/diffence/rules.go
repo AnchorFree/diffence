@@ -554,6 +554,28 @@ const (
     "pattern": "\\A\\.?env\\z",
     "caption": "Environment configuration file",
     "description": null
+  },
+  { 
+    "part": "content",
+    "type": "regex",
+    "pattern": "(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}",
+    "caption": "AWS creds",
+    "description": "Might contain plaintext AWS public keys"
+  },
+  { 
+
+    "part": "content",
+    "type": "regex",
+    "pattern": "(\"|')?(?i)((aws)?_?(secret)?_?(access)?_?key)(\"|')?\\s*(:|=>|=)\\s*(\"|')?[A-Za-z0-9/\\+=]{40}(\"|')?",
+    "caption": "AWS creds",
+    "description": "Might contain plaintext AWS secret keys"
+  },
+  { 
+    "part": "content",
+    "type": "regex",
+    "pattern": "(-----BEGIN PRIVATE KEY-----|-----BEGIN RSA PRIVATE KEY-----|-----BEGIN OPENSSH PRIVATE KEY----|-----BEGIN PGP PRIVATE KEY BLOCK-----)",
+    "caption": "Private key",
+    "description": "Might contain plaintext ssh/pgp/rsa private key"
   }
 ]
 `

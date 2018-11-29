@@ -3,9 +3,6 @@ LABEL maintainer="v.zorin@anchorfree.com"
 
 RUN apk add --no-cache git 
 COPY . /go/src/github.com/anchorfree/diffence
-
-RUN cd /go && go get -u github.com/golang/dep/cmd/dep
-RUN cd /go/src/github.com/anchorfree/diffence/ && dep ensure
 RUN cd /go && go build github.com/anchorfree/diffence/cmd/diffence
 
 FROM alpine:3.8

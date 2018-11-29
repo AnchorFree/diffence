@@ -3,10 +3,9 @@ package main
 import (
 	"bufio"
 	"flag"
+	"github.com/anchorfree/diffence/pkg/diffence"
 	"log"
 	"os"
-
-	"github.com/techjacker/diffence"
 )
 
 func main() {

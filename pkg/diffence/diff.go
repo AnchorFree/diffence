@@ -4,7 +4,6 @@ import (
 	"encoding/hex"
 	"fmt"
 	"strings"
-	"unicode"
 )
 
 const (
@@ -51,11 +50,13 @@ type Diff struct {
 // Push a diff on to the list
 func (d *Diff) Push(s string) {
 
-	var commitHeader, commit string
+	//var commitHeader, commit string
+	var commit string
 
 	if beginsWithHash(s) {
-		commitHeader, s = split(s, "\n")
-		commit = extractHash(commitHeader)
+		//commitHeader, s = split(s, "\n")
+		//commit = extractHash(commitHeader)
+		commit = extractHash(s)
 		d.commitTmp = commit
 	}
 	// add commit to diffs within each diff which do not
@@ -83,16 +84,12 @@ func (d *Diff) Push(s string) {
 
 // split out logic from scan.go
 func beginsWithHash(s string) bool {
-	if len(s) < 1 {
-		return false
+	if strings.HasPrefix(s, "commit ") {
+		commitHash := strings.Fields(s)[1]
+		_, e := hex.DecodeString(commitHash)
+		return e == nil
 	}
-	hashEnd := strings.IndexFunc(s, unicode.IsSpace)
-	if hashEnd < 1 {
-		return false
-	}
-	commitHash := s[:hashEnd]
-	_, e := hex.DecodeString(commitHash)
-	return e == nil
+	return false
 }
 
 func split(s, sep string) (string, string) {
@@ -118,5 +115,5 @@ func extractFilePath(in string) (string, error) {
 }
 
 func extractHash(in string) string {
-	return strings.Fields(in)[0]
+	return strings.Fields(in)[1]
 }

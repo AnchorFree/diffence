@@ -19,6 +19,12 @@ const (
 )
 
 const (
+	// RulePartContent checks the content of the commit
+	RulePartContent = "content"
+
+	// RulePartCommit checks the commit message itself
+	RulePartCommit = "commit"
+
 	// RulePartPath checks the whole path of the file
 	RulePartPath = "path"
 

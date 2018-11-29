@@ -27,7 +27,16 @@ func (dc DiffChecker) Check(r io.Reader) (Result, error) {
 
 	for _, d := range diff.Items {
 		for _, r := range *dc.Rules {
-			if r.Match(d.fPath) {
+
+			data := d.fPath
+			if r.Part == "content" {
+				data = d.raw
+			}
+			if r.Part == "commit" {
+				data = d.commit
+			}
+
+			if r.Match(data) {
 				res.Matched = true
 
 				if _, ok := res.MatchedRules[d.GetHashKey()]; !ok {
