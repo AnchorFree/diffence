@@ -13,6 +13,7 @@ RUN apk add --no-cache git bash && wget -q -O /etc/apk/keys/sgerrand.rsa.pub htt
     && apk add git-crypt-0.6.0-r0.apk \
     && rm git-crypt-0.6.0-r0.apk
 
+RUN ln -s /bin/git-crypt /usr/bin/git-crypt
 COPY --from=builder /go/diffence /usr/local/bin/diffence
 
 ENTRYPOINT ["/bin/bash"]
